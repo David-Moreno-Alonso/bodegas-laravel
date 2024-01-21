@@ -15,7 +15,11 @@ use App\Http\Controllers\BodegaController;
 |
 */
 
-Route::get('/bodegas', [BodegaController::class, 'index'])->name('bodegas.index');
+Route::get('/bodegas', [BodegaController::class, 'index'])->middleware(['auth', 'verified'])->name('bodegas.index');
+
+Route::delete('/bodegas/{bodega}', [BodegaController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('bodegas.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

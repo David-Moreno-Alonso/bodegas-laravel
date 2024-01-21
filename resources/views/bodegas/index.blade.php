@@ -4,89 +4,93 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Gestion de bodegas</title>
-
     <!-- Fonts -->
     @vite('resources/css/app.css')
 </head>
 
 <body>
-    <header class="border-b-2">
-        <nav class="bg-white border-gray-200 dark:bg-gray-900">
-            <div class="flex flex-wrap items-center justify-between mx-auto p-4">
-                <a class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Gestion de
-                        bodegas</span>
-                </a>
-                <button data-collapse-toggle="navbar-default" type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    aria-controls="navbar-default" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
-                </button>
-                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                    <ul
-                        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                        <li>
-                            @auth
-                                <a href="{{ url('/dashboard') }}"
-                                    class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                                    aria-current="page">Perfil</a>
-                            @endauth
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
+    @include('bodegas.partials.header')
+    <main class="mx-4">
         <section class="bg-white dark:bg-gray-900">
             <div class="py-4 px-4 mx-auto max-w-screen-xl text-center lg:py-4">
                 <h1
                     class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                     Gestión de Bodegas</h1>
                 <p class="mb-2 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
-                    Este proyecto como hacer una aplicacion web MVC con PHP.
+                    Bienvenid@ a la base de datos oficial de nuestra aplicacion. (Portese bien :D)
                 </p>
             </div>
         </section>
-
-        <div class="bodegas mx-2">
-            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">+Añadir
-            Bodega</button>
-            @if (count($bodegas) > 0)
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Localización</th>
-                            <th>Teléfono</th>
-                            <th>Email</th>
+        <a href="/" class="relative inline-block text-lg group">
+            <span
+                class="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-blue-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
+                <span class="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
+                <span
+                    class="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-blue-900 group-hover:-rotate-180 ease"></span>
+                <span class="relative">+ Añadir Bodega</span>
+            </span>
+            <span
+                class="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-blue-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
+                data-rounded="rounded-lg"></span>
+        </a>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-2">
+            <table class="w-full text-sm rtl:text-right text-gray-500 dark:text-gray-400 text-center">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Nombre
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Localización
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Teléfono
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Email
+                        </th>
+                        <!-- Agrega más columnas según sea necesario -->
+                        <th scope="col" class="px-6 py-3">
+                            Acción
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($bodegas as $bodega)
+                        <tr
+                            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <td class="px-6 py-4">{{ $bodega->id }}</td>
+                            <td class="px-6 py-4">{{ $bodega->nombre }}</td>
+                            <td class="px-6 py-4">{{ $bodega->localizacion }}</td>
+                            <td class="px-6 py-4">{{ $bodega->telefono }}</td>
+                            <td class="px-6 py-4">{{ $bodega->email }}</td>
+                            <!-- Agrega más columnas según sea necesario -->
+                            <td class="flex items-center justify-center gap-2 m-2">
+                                <a href="/bodegas/bodega/{{ $bodega->id }}"
+                                    class="px-5 py-2.5 font-medium bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm">
+                                    Entrar
+                                </a>
+                                <form action="{{ route('bodegas.destroy', $bodega->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="px-5 py-2.5 font-medium bg-red-50 hover:bg-red-100 hover:text-red-600 text-red-500 rounded-lg text-sm">
+                                        Borrar
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($bodegas as $bodega)
-                            <tr>
-                                <td>{{ $bodega->id }}</td>
-                                <td>{{ $bodega->nombre }}</td>
-                                <td>{{ $bodega->localizacion }}</td>
-                                <td>{{ $bodega->telefono }}</td>
-                                <td>{{ $bodega->email }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @else
-                <p>No hay bodegas registradas.</p>
-            @endif
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </main>
+    @include('bodegas.partials.footer')
 </body>
+
 
 </html>
