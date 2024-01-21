@@ -55,6 +55,37 @@
                 </p>
             </div>
         </section>
+
+        <div class="bodegas mx-2">
+            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">+Añadir
+            Bodega</button>
+            @if (count($bodegas) > 0)
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Localización</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($bodegas as $bodega)
+                            <tr>
+                                <td>{{ $bodega->id }}</td>
+                                <td>{{ $bodega->nombre }}</td>
+                                <td>{{ $bodega->localizacion }}</td>
+                                <td>{{ $bodega->telefono }}</td>
+                                <td>{{ $bodega->email }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>No hay bodegas registradas.</p>
+            @endif
+        </div>
     </main>
 </body>
 
