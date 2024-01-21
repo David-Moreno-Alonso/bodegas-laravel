@@ -76,14 +76,6 @@
                                 class="px-5 py-2.5 font-medium bg-yellow-50 hover:bg-yellow-100 hover:text-yellow-600 text-yellow-500 rounded-lg text-sm">
                                 Editar
                             </a>
-                            <form action="{{ route('bodegas.destroy', $bodega->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="px-5 py-2.5 font-medium bg-red-50 hover:bg-red-100 hover:text-red-600 text-red-500 rounded-lg text-sm">
-                                    Borrar
-                                </button>
-                            </form>
                         </td>
                     </tr>
                 </tbody>
@@ -97,6 +89,9 @@
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Nombre
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Descripcion
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Tipo
@@ -115,6 +110,7 @@
                         <tr
                             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                             <td class="px-6 py-4">{{ $vino->nombre }}</td>
+                            <td class="px-6 py-4">{{ $vino->descripcion }}</td>
                             <td class="px-6 py-4">{{ $vino->tipo }}</td>
                             <td class="px-6 py-4">{{ $vino->año }}</td>
 
