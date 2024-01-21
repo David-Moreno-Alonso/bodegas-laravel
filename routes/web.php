@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BodegaController;
+use App\Http\Controllers\VinoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/bodegas/{bodega}', [BodegaController::class, 'destroy'])->name('bodegas.destroy');
     Route::post('/bodegas', [BodegaController::class, 'store'])->name('bodegas.store');
     Route::get('/bodegas/bodega/{bodega}', [BodegaController::class, 'show'])->name('bodegas.show');
+    Route::get('bodegas/{bodega}/vinos/create', [VinoController::class, 'create'])->name('vinos.create');
+    Route::post('bodegas/{bodega}/vinos', [VinoController::class, 'store'])->name('vinos.store');
+    Route::delete('/bodegas/{bodega}/vinos/{vino}', [VinoController::class, 'destroy'])->name('vinos.destroy');
+
 });
 
 Route::get('/dashboard', function () {

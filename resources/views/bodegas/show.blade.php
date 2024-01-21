@@ -12,8 +12,8 @@
 
 <body>
     @include('bodegas.partials.header')
-    <main class="h-dvh">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-2">
+    <main class="mx-4 h-dvh">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-2 mb-6">
             <h1 class="text-2xl font-medium text-gray-700 uppercase text-center">Datos de la Bodega,
                 {{ $bodega->nombre }}</h1>
             <table class="w-full text-sm rtl:text-right text-gray-500 dark:text-gray-400 text-center">
@@ -35,6 +35,18 @@
                             Email
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Contacto
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Fundación
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Restaurante
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Hotel
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Acción
                         </th>
                     </tr>
@@ -47,6 +59,18 @@
                         <td class="px-6 py-4">{{ $bodega->localizacion }}</td>
                         <td class="px-6 py-4">{{ $bodega->telefono }}</td>
                         <td class="px-6 py-4">{{ $bodega->email }}</td>
+                        <td class="px-6 py-4">{{ $bodega->contacto }}</td>
+                        <td class="px-6 py-4">{{ $bodega->fundacion }}</td>
+                        @if ($bodega->restaurante == 'S')
+                            <td class="px-6 py-4">Si</td>
+                        @else
+                            <td class="px-6 py-4">No</td>
+                        @endif
+                        @if ($bodega->hotel == 'S')
+                            <td class="px-6 py-4">Si</td>
+                        @else
+                            <td class="px-6 py-4">No</td>
+                        @endif
                         <td class="flex items-center justify-center gap-2 m-2">
                             <a href="/bodegas/bodega/{{ $bodega->id }}"
                                 class="px-5 py-2.5 font-medium bg-yellow-50 hover:bg-yellow-100 hover:text-yellow-600 text-yellow-500 rounded-lg text-sm">
@@ -65,7 +89,6 @@
                 </tbody>
             </table>
         </div>
-
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-2">
             <h1 class="text-2xl font-medium text-gray-700 uppercase text-center">Vinos disponibles</h1>
 
@@ -100,7 +123,7 @@
                                     class="px-5 py-2.5 font-medium bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm">
                                     Entrar
                                 </a>
-                                <form action="{{ route('bodegas.destroy', $bodega->id) }}" method="POST">
+                                <form action="{{ route('vinos.destroy', ['bodega' => $bodega->id, 'vino' => $vino->id]) }}"  method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -115,7 +138,7 @@
             </table>
         </div>
         <div class=" w-full flex items-center justify-center mb-4">
-            <a href="{{ route('bodegas.create') }}" class="relative inline-block text-lg group">
+            <a href="{{ route('vinos.create', $bodega->id) }}" class="relative inline-block text-lg group">
                 <span
                     class="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-blue-800 transition-colors duration-300 ease-out border-2 border-blue-800 rounded-lg group-hover:text-white">
                     <span class="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>

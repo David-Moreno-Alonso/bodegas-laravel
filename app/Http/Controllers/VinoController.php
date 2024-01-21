@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vino;
 use App\Models\Bodega;
+
 class VinoController extends Controller
 {
     public function index()
@@ -13,17 +14,22 @@ class VinoController extends Controller
         return view('vinos.index', compact('vinos'));
     }
 
-    public function create()
+    public function create(Bodega $bodega)
     {
-        $bodegas = Bodega::all();
-        return view('vinos.create', compact('bodegas'));
+        return view('vinos.create', compact('bodega'));
     }
 
-    public function store(Request $request)
+
+    public function store(Request $request, Bodega $bodega)
     {
-        $vino = Vino::create($request->all());
-        return redirect()->route('vinos.index')->with('success', 'Vino creado correctamente');
+        $vinoData = $request->all();
+        $vinoData['bodega_id'] = $bodega->id; // Asigna el ID de la bodega al campo 'bodega_id'
+
+        $vino = Vino::create($vinoData);
+
+        return redirect()->route('bodegas.show', $bodega->id)->with('success', 'Vino creado correctamente');
     }
+
 
     public function edit(Vino $vino)
     {
@@ -37,10 +43,11 @@ class VinoController extends Controller
         return redirect()->route('vinos.index')->with('success', 'Vino actualizado correctamente');
     }
 
-    public function destroy(Vino $vino)
+    public function destroy(Bodega $bodega, Vino $vino)
     {
         $vino->delete();
-        return redirect()->route('vinos.index')->with('success', 'Vino eliminado correctamente');
+
+        return redirect()->route('bodegas.show', $bodega->id)->with('success', 'Vino eliminado correctamente');
     }
 }
 

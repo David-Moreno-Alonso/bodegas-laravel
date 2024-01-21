@@ -10,7 +10,7 @@
 
 <body>
     @include('bodegas.partials.header')
-    <main class="mx-4">
+    <main class="mx-4 h-dvh">
         <section class="bg-white dark:bg-gray-900">
             <div class="py-4 px-4 mx-auto max-w-screen-xl text-center lg:py-4">
                 <h1
