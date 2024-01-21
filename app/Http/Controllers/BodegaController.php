@@ -40,5 +40,11 @@ class BodegaController extends Controller
         $bodega->delete();
         return redirect()->route('bodegas.index')->with('success', 'Bodega eliminada correctamente');
     }
+
+    public function show(Bodega $bodega)
+    {
+        return view('bodegas.show', compact('bodega'));
+    }
+
 }
 

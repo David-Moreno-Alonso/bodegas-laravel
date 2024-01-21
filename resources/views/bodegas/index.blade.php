@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestion de bodegas</title>
-    <!-- Fonts -->
     @vite('resources/css/app.css')
 </head>
 
@@ -22,18 +21,20 @@
                 </p>
             </div>
         </section>
-        <a href="/" class="relative inline-block text-lg group">
-            <span
-                class="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-blue-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
-                <span class="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-                <span
-                    class="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-blue-900 group-hover:-rotate-180 ease"></span>
-                <span class="relative">+ Añadir Bodega</span>
-            </span>
-            <span
-                class="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-blue-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
-                data-rounded="rounded-lg"></span>
-        </a>
+
+        <div class=" w-full flex items-center justify-center mb-4">
+            <a href="{{ route('bodegas.create') }}" class="relative inline-block text-lg group">
+                <span class="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-blue-800 transition-colors duration-300 ease-out border-2 border-blue-800 rounded-lg group-hover:text-white">
+                    <span class="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
+                    <span class="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-blue-900 group-hover:-rotate-180 ease"></span>
+                    <span class="relative">+ Añadir Bodega</span>
+                </span>
+                <span class="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-blue-900 rounded-lg group-hover:mb-0 group-hover:mr-0"
+                    data-rounded="rounded-lg"></span>
+            </a>
+        </div>
+
+
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-2">
             <table class="w-full text-sm rtl:text-right text-gray-500 dark:text-gray-400 text-center">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -53,7 +54,6 @@
                         <th scope="col" class="px-6 py-3">
                             Email
                         </th>
-                        <!-- Agrega más columnas según sea necesario -->
                         <th scope="col" class="px-6 py-3">
                             Acción
                         </th>
@@ -68,7 +68,6 @@
                             <td class="px-6 py-4">{{ $bodega->localizacion }}</td>
                             <td class="px-6 py-4">{{ $bodega->telefono }}</td>
                             <td class="px-6 py-4">{{ $bodega->email }}</td>
-                            <!-- Agrega más columnas según sea necesario -->
                             <td class="flex items-center justify-center gap-2 m-2">
                                 <a href="/bodegas/bodega/{{ $bodega->id }}"
                                     class="px-5 py-2.5 font-medium bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm">

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('tipo');
             $table->timestamps();
     
-            $table->foreign('bodega_id')->references('id')->on('bodegas');
+            $table->foreign('bodega_id')->references('id')->on('bodegas')->onDelete('cascade');
         });
     }
 

@@ -15,11 +15,13 @@ use App\Http\Controllers\BodegaController;
 |
 */
 
-Route::get('/bodegas', [BodegaController::class, 'index'])->middleware(['auth', 'verified'])->name('bodegas.index');
-
-Route::delete('/bodegas/{bodega}', [BodegaController::class, 'destroy'])
-    ->middleware(['auth', 'verified'])
-    ->name('bodegas.destroy');
+Route::middleware('auth')->group(function () {
+    Route::get('/bodegas', [BodegaController::class, 'index'])->name('bodegas.index');
+    Route::get('/bodegas/create', [BodegaController::class, 'create'])->name('bodegas.create');
+    Route::delete('/bodegas/{bodega}', [BodegaController::class, 'destroy'])->name('bodegas.destroy');
+    Route::post('/bodegas', [BodegaController::class, 'store'])->name('bodegas.store');
+    Route::get('/bodegas/bodega/{bodega}', [BodegaController::class, 'show'])->name('bodegas.show');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
